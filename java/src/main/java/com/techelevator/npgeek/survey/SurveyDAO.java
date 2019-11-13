@@ -4,24 +4,24 @@ import java.util.List;
 
 public interface SurveyDAO {
 
-	//Create
-	public Survey addSurvey(Survey newSurvey);
-	
-	//Read
+	// Create
+	public Survey addSurvey(String parkCode, String emailAddress, String state, String activityLeve);
+
+	// Read
 	public Survey getSurveyById(long surveyId);
-	
+
 	public Survey getSurveyByParkCode(String parkCode);
-	
-	public List<Survey> getSurveysById(long surveyId);
-	
+
+	public List<Survey> getAllSurveys();
+
 	public List<Survey> getSurveysByParkCode(String parkCode);
-	
-	//Update
+
+	// Update
 	public void changeSurveyData(Survey updatedSurvey);
-	
-	//Delete
+
+	// Delete
 	public void deleteSurveyById(long surveyId);
-	
+
 	public void deleteSurveyByParkCode(String parkCode);
-	
+
 }

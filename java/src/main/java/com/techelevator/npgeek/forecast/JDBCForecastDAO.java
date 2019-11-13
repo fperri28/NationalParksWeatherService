@@ -7,8 +7,6 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
-import com.techelevator.npgeek.survey.Survey;
-
 public class JDBCForecastDAO implements ForecastDAO {
 
 	private JdbcTemplate jdbcTemplate;
@@ -16,7 +14,7 @@ public class JDBCForecastDAO implements ForecastDAO {
 	public JDBCForecastDAO(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Override
 	public Forecast addDay(Forecast newDay) {
 		// TODO Auto-generated method stub
@@ -31,8 +29,14 @@ public class JDBCForecastDAO implements ForecastDAO {
 
 	@Override
 	public Forecast getForecastByParkCode(String parkCode) {
-		// TODO Auto-generated method stub
-		return null;
+		Forecast theForecast = null;
+		String sqlSearchForecastByParkCode = "select * from weather where parkcode = ?";
+
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForecastByParkCode, parkCode);
+		while (results.next()) {
+			theForecast = mapRowToForecast(results);
+		}
+		return theForecast;
 	}
 
 	@Override
@@ -56,29 +60,27 @@ public class JDBCForecastDAO implements ForecastDAO {
 	@Override
 	public void changeForecastData(Forecast updatedForecast) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteDay(int fiveDayForecastValue, String parkCode) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 //	-------------------------------	HELPER METHODS	---------------------------------
 
-	
 	private Forecast mapRowToForecast(SqlRowSet results) {
-		Forecast theForecast = new Forecast(); 
-		
-		theForecast.setParkCode(results.getString("parkCode"));		
+		Forecast theForecast = new Forecast();
+
+		theForecast.setParkCode(results.getString("parkCode"));
 		theForecast.setFiveDayForecastValue(results.getInt("fiveDayForecastValue"));
 		theForecast.setLow(results.getInt("low"));
 		theForecast.setHigh(results.getInt("high"));
 		theForecast.setForecast(results.getString("forecast"));
-		
+
 		return theForecast;
 	}
-	
 
 }
