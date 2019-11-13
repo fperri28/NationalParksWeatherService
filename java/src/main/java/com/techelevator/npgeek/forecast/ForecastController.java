@@ -1,5 +1,7 @@
 package com.techelevator.npgeek.forecast;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,8 +16,8 @@ public class ForecastController {
 	private ForecastDAO forecastDao;
 
 	@RequestMapping(path = "/forecast", method = RequestMethod.GET)
-	public String displayForecast(ModelMap map, @RequestParam String parkCode) {
-		map.put("forecast", forecastDao.getForecastByParkCode(parkCode));
+	public String displayForecast(HttpSession session, @RequestParam String parkCode) {
+		session.setAttribute("forecast", forecastDao.getForecastByParkCodes(parkCode));
 		return "forecast";
 	}
 

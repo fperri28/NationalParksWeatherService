@@ -53,6 +53,55 @@
 			<c:out value="Number of Animal Species: ${park.numberOfAnimalSpecies}"  />
 		</p>
 
+<div>
+<c:forEach begin="0" end="0" items="${forecast}" var="forecast">
+
+
+		<p> <img src = "/m3-java-capstone/img/weather/${forecast.forecast}.png"/>
+		</p>
+
+		<p><c:out value="${forecast.high}"/>
+		</p>
+		<p><c:out value="${forecast.low}"/>
+		</p> 
+		
+		<p>
+			<c:set var="message" />
+			<c:choose>
+				<c:when test="${forecast.high > 75}"> Bring an extra gallon of water</c:when>
+				<c:when test="${forecast.high - forecast.low > 20}"> Wear breathable layers </c:when>
+				<c:when test="${forecast.low < 20}"> Visit with caution, we cannot be held responsible for frost bite </c:when>
+				<c:otherwise> Look forward to a wonderful day in the Parks System. Have Fun! </c:otherwise>
+			</c:choose>
+			</p>
+
+		<p>
+			<c:set var="weather" />
+			<c:choose>
+				<c:when test="${forecast.forecast.equals('rain')}"> It's going to rain, pack rain gear and wear waterproof shoes </c:when>
+				<c:when test="${forecast.forecast.equals('snow')}"> It's going to snow, pack snow shoes </c:when>
+				<c:when test="${forecast.forecast.equals('thunderstorms')}"> It's going to thunderstorm, seek shelter and avoid hiking on exposed ridges </c:when>
+				<c:when test="${forecast.forecast.equals('sunny')}"> It's going to be sunny, pack sunblock </c:when>
+				<c:otherwise> Look forward to a wonderful day in the Parks System. Have Fun! </c:otherwise>
+			</c:choose>
+		</p>	
+		
+
+</c:forEach>
+</div>
+
+
+
+<div>
+	<form action="forecast" method="GET">
+				<div>		
+					<input type="hidden" name="parkCode" value ="${park.parkCode}"/>
+				</div>	
+				<div>
+					<input type="submit" value="Check the 5 day forecast" />
+				</div>		
+			</form>
+</div>
 
 </div>
 

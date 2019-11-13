@@ -1,5 +1,6 @@
 package com.techelevator.npgeek.forecast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+
+import com.techelevator.npgeek.survey.Survey;
 
 @Component
 public class JDBCForecastDAO implements ForecastDAO {
@@ -52,8 +55,18 @@ public class JDBCForecastDAO implements ForecastDAO {
 
 	@Override
 	public List<Forecast> getForecastByParkCodes(String parkCode) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Forecast> allForecasts = new ArrayList<Forecast>();
+
+		String sqlListAllForecastsByParkCode = "select * from weather where parkcode = ?";
+
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlListAllForecastsByParkCode, parkCode);
+
+		while (results.next()) {
+			Forecast aForecast = mapRowToForecast(results);
+			allForecasts.add(aForecast);
+		}
+
+		return allForecasts;
 	}
 
 	@Override

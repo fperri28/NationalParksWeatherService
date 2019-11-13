@@ -6,18 +6,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Forecast for ${forecast.parkCode}</title>
+<title>Forecast for ${forecast}</title>
 </head>
 <body>
 <div>
-<c:forEach items="${forecast.parkCode}" var="parkCode">
-<p> <img src = "/m3-java-capstone/img/weather/${forecast.forecast}.png"/>
-</p>
+<c:forEach items="${forecast}" var="forecast">
 
-<p><c:out value="${forecast.high}"/>
-</p>
-<p><c:out value="${forecast.low}"/>
-</p> 
+	<p>
+	<c:out value="${forecast.fiveDayForecastValue }"/>
+	</p>
+		<p> <img src = "/m3-java-capstone/img/weather/${forecast.forecast}.png"/>
+		</p>
+
+		<p><c:out value="${forecast.high}"/>
+		</p>
+		<p><c:out value="${forecast.low}"/>
+		</p> 
+
 
 </c:forEach>
 </div>
