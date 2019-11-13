@@ -5,13 +5,17 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
+@Component
 public class JDBCParkDAO implements ParkDAO {
 
 	private JdbcTemplate jdbcTemplate;
 
+	@Autowired
 	public JDBCParkDAO(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
@@ -23,8 +27,16 @@ public class JDBCParkDAO implements ParkDAO {
 
 	@Override
 	public Park getParkByCode(String aParkCode) {
-		// TODO Auto-generated method stub
-		return null;
+		Park aPark = null;
+
+		String sqlSearchParksByName = "select * from park where parkcode = ?";
+
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchParksByName, aParkCode);
+
+		while (results.next()) {
+			aPark = mapRowToPark(results);
+		}
+		return aPark;
 	}
 
 	@Override
@@ -84,6 +96,7 @@ public class JDBCParkDAO implements ParkDAO {
 		thePark.setElevationInFeet(results.getInt("elevationInFeet"));
 		thePark.setMilesOfTrail(results.getDouble("milesOfTrail"));
 		thePark.setNumberOfCampsites(results.getInt("numberOfCampsites"));
+		thePark.setClimate(results.getString("climate"));
 		thePark.setYearFounded(results.getInt("yearFounded"));
 		thePark.setAnnualVisitorCount(results.getInt("annualVisitorCount"));
 		thePark.setInspirationalQuote(results.getString("inspirationalQuote"));

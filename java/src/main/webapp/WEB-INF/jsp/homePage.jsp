@@ -14,9 +14,10 @@
 
 	<div>
 		<c:forEach items="${park}" var="park">
+		<a style=" text-decoration: none" href="parkDetail?parkCode=${park.parkCode}">
 			<div >
 				<p>
-					<img src="/m3-java-capstone/src/main/webapp/img/parks/${fn:toLowerCase(parkCode)}.jpg"/>
+					<img src="/m3-java-capstone/img/parks/${fn:toLowerCase(park.parkCode)}.jpg"/>
 				</p>
 				<p>
 					<c:out value=" ${park.parkName}" />
@@ -26,6 +27,7 @@
 				</p>
 
 			</div>
+			</a>
 		</c:forEach>
 	</div>
 
