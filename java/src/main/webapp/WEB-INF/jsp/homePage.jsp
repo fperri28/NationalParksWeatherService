@@ -30,15 +30,18 @@ grid-item {
 
 .title {
   grid-area: title;
+  font-family: helvetica;
 }
 
 .description {
   grid-area: description;
+  font-family: helvetica;
 }
 
 .image img {
     width: 100%;
     height: auto;
+
 }
   
 </style>
@@ -47,8 +50,8 @@ grid-item {
 <title>Welcome to the National Parks Weather Service</title>
 
 <section>
-	<div style="padding: 10px; text-align: center">
-	<p>Welcome to the National Parks Weather Service</p>
+	<div style="padding: 10px; text-align: center; font-family: helvetica; font-size: 20px;">
+	<p>Welcome to the National Parks Weather Service!</p>
 	</div>
 	
 	

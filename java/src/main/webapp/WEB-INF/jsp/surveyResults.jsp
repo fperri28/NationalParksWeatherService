@@ -5,8 +5,8 @@
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 
 
-<h2>Thank you for taking our survey! How does your favorite park compare to other popular parks? See below!</h2>
-
+<h2 style = "font-family: helvetica;">Thank you for taking our survey! How does your favorite park compare to other popular parks? See below!</h2>
+<div style="font-family: helvetica; font-size: 18px;">
 <c:forEach items="${post}" var="park">
 		<p>Park Code: <c:out value="${park.parkCode}"/>
 		</p>
@@ -14,7 +14,7 @@
 		</p> 
 
 </c:forEach>
-
+</div>
 
 </body>
 </html>

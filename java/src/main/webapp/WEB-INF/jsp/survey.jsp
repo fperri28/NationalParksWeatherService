@@ -6,7 +6,8 @@
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 
 
-<section id="main-content"  class="centeredPanel">
+
+<section id="main-content"  class="centeredPanel" style = "font-family: helvetica;">
 <c:url value="/survey" var="surveyUrl" />
 
 <!-- form:form - indicates you want the Spring version of form as indicated above in taglib -->
@@ -15,10 +16,10 @@
 <!-- Any names used in the form are assumed to match the POJO variable names -->
 <!-- the modelAttribute is automatically passed to the controller on "submit" -->
 
-<h2>Please take our Survey</h2>
+<h2 style="font-family: helvetica;">Please take our Survey</h2>
 <form:form action="${surveyUrl}" method="POST" modelAttribute="Survey">
 
-        <div>
+        <div style="font-family: helvetica;">
         	<label for="parkCode">Favorite National Park</label>
         	
    

@@ -5,15 +5,20 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
+<style>
+h2 {
+font-family: helvetica;
+}
+</style>
 
 <title>${park.parkName}</title>
     
 <h2>${park.parkName}</h2>
-	<div >
+	<div style="font-family: helvetica; font-size: 20px;" >
 		<p>
 			<img src="/m3-java-capstone/img/parks/${fn:toLowerCase(park.parkCode)}.jpg"/>
 		</p>
-		<p>
+		<p style="font-style: italic;">
 			<c:out value="${park.parkDescription}" />
 		</p>
 		<p>
@@ -40,20 +45,24 @@
 		<p>
 			<c:out value=" ${park.annualVisitorCount} vistors per year"  />
 		</p>
-		<p>
-			<c:out value='Inspirational Quote: "${park.inspirationalQuote}"' />
+		<br>
+		<br>
+		<p style = "font-style: italic;">
+			<c:out value="${park.inspirationalQuote}" />
 		</p>
 		<p>
-			<c:out value="Inspirational Source: ${park.inspirationalQuoteSource}" />
+			<c:out value="-- ${park.inspirationalQuoteSource}" />
 		</p>
+		<br>
+		<br>
 		<p>
-			<c:out value="Entry Fee: $ ${park.entryFee}"  />
+			<c:out value="Entry Fee: $${park.entryFee}"  />
 		</p>
 		<p>
 			<c:out value="Number of Animal Species: ${park.numberOfAnimalSpecies}"  />
 		</p>
 
-<div style="background: blue;">
+<div style="background: blue; font-family: helvetica;">
 <c:forEach begin="0" end="0" items="${forecast}" var="forecast">
 		
 		<p>Today's Forecast:
@@ -61,16 +70,16 @@
 			<c:choose>
 				<c:when test="${forecast.high > 75}"> Bring an extra gallon of water.</c:when>
 				<c:when test="${forecast.high - forecast.low > 20}"> Wear breathable layers. </c:when>
-				<c:when test="${forecast.low < 20}"> Visit with caution, we cannot be held responsible for frost bite. </c:when>
+				<c:when test="${forecast.low < 20}"> Visit with caution! We cannot be held responsible for frostbite. </c:when>
 				<c:otherwise> Expect moderate temperatures today.</c:otherwise>
 			</c:choose>
 
 			<c:set var="weather" />
 			<c:choose>
-				<c:when test="${forecast.forecast.equals('rain')}"> It's going to rain, pack rain gear and wear waterproof shoes. </c:when>
-				<c:when test="${forecast.forecast.equals('snow')}"> It's going to snow, pack snow shoes. </c:when>
-				<c:when test="${forecast.forecast.equals('thunderstorms')}"> It's going to thunderstorm, seek shelter and avoid hiking on exposed ridges. </c:when>
-				<c:when test="${forecast.forecast.equals('sunny')}"> It's going to be sunny, pack sunblock. </c:when>
+				<c:when test="${forecast.forecast.equals('rain')}"> It's going to rain. Pack rain gear and wear waterproof shoes. </c:when>
+				<c:when test="${forecast.forecast.equals('snow')}"> It's going to snow. Pack snowshoes. </c:when>
+				<c:when test="${forecast.forecast.equals('thunderstorms')}"> It's going to thunderstorm. Seek shelter and avoid hiking on exposed ridges. </c:when>
+				<c:when test="${forecast.forecast.equals('sunny')}"> It's going to be sunny. Pack sunblock. </c:when>
 				<c:otherwise> Expect clear skies. </c:otherwise>
 			</c:choose>
 		</p>
