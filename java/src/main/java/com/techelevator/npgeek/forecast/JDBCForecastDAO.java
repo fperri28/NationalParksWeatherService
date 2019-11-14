@@ -10,12 +10,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import com.techelevator.npgeek.survey.Survey;
-
 @Component
 public class JDBCForecastDAO implements ForecastDAO {
 
-	
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
@@ -36,13 +33,13 @@ public class JDBCForecastDAO implements ForecastDAO {
 	}
 
 	@Override
-	public Forecast getForecastByParkCode(String parkCode) {
+	public Forecast getForecastByParkCode(String parkCode, String tempUnit) {
 		Forecast theForecast = null;
 		String sqlSearchForecastByParkCode = "select * from weather where parkcode = ?";
 
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSearchForecastByParkCode, parkCode);
 		while (results.next()) {
-			theForecast = mapRowToForecast(results);
+			theForecast = mapRowToForecast(results, tempUnit);
 		}
 		return theForecast;
 	}
@@ -54,7 +51,7 @@ public class JDBCForecastDAO implements ForecastDAO {
 	}
 
 	@Override
-	public List<Forecast> getForecastByParkCodes(String parkCode) {
+	public List<Forecast> getForecastByParkCodes(String parkCode, String tempUnit) {
 		List<Forecast> allForecasts = new ArrayList<Forecast>();
 
 		String sqlListAllForecastsByParkCode = "select * from weather where parkcode = ?";
@@ -62,7 +59,7 @@ public class JDBCForecastDAO implements ForecastDAO {
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlListAllForecastsByParkCode, parkCode);
 
 		while (results.next()) {
-			Forecast aForecast = mapRowToForecast(results);
+			Forecast aForecast = mapRowToForecast(results, tempUnit);
 			allForecasts.add(aForecast);
 		}
 
@@ -89,13 +86,13 @@ public class JDBCForecastDAO implements ForecastDAO {
 
 //	-------------------------------	HELPER METHODS	---------------------------------
 
-	private Forecast mapRowToForecast(SqlRowSet results) {
+	private Forecast mapRowToForecast(SqlRowSet results, String tempUnit) {
 		Forecast theForecast = new Forecast();
 
 		theForecast.setParkCode(results.getString("parkCode"));
 		theForecast.setFiveDayForecastValue(results.getInt("fiveDayForecastValue"));
-		theForecast.setLow(results.getInt("low"));
-		theForecast.setHigh(results.getInt("high"));
+		theForecast.setLow(tempUnit.equals("C") ? (results.getInt("low") - 32) * 5 / 9 : results.getInt("low"));
+		theForecast.setHigh(tempUnit.equals("C") ? (results.getInt("high") - 32) * 5 / 9 : results.getInt("high"));
 		theForecast.setForecast(results.getString("forecast"));
 
 		return theForecast;

@@ -110,22 +110,30 @@ font-family: helvetica;
 	 </c:url>
  	<form:form action="${temperatureUrl}" method="POST">
 		<label for="temperature">Temperature</label><br>
-        	<form:input  path="temperature" />
+     <%--    	<form:input  path="temperature" /> --%>
         	<input checked type="radio" name="temperature" value="Fahrenheit">Fahrenheit<br>
         	<input type="radio" name="temperature" value="Celsius">Celsius<br>
+        	<input type="submit" value= "Change temperature preference">
 
         	<br>
 
 	</form:form>   
 </p>
-	<form action="forecast" method="GET">
-				<div>		
-					<input type="hidden" name="parkCode" value ="${park.parkCode}"/>
-				</div>	
-				<div>
-					<input type="submit" value="Check the 5 day forecast" />
-				</div>		
-			</form>
+	<c:forEach begin="1" end="5" items="${forecast}" var="forecast">
+
+	<p>
+	<c:out value="${forecast.fiveDayForecastValue }"/>
+	</p>
+		<p> <img src = "/m3-java-capstone/img/weather/${forecast.forecast}.png"/>
+		</p>
+
+		<p><c:out value="High: ${forecast.high}"/>º
+		</p>
+		<p><c:out value="Low: ${forecast.low}"/>º
+		</p> 
+
+
+</c:forEach>
 </div>
 
 </div>

@@ -1,8 +1,6 @@
 package com.techelevator.npgeek;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -20,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techelevator.npgeek.forecast.ForecastDAO;
-import com.techelevator.npgeek.survey.SurveyDAO;
-
 
 @Controller
 public class ParkController extends HttpServlet {
@@ -33,10 +29,9 @@ public class ParkController extends HttpServlet {
 
 	@Autowired
 	private ParkDAO parkDao;
-	
+
 	@Autowired
 	private ForecastDAO forecastDao;
-	
 
 	@RequestMapping(path = "/parkDetail", method = RequestMethod.GET)
 	public String displayDetail(HttpSession session, @RequestParam String parkCode, ModelMap map) {
@@ -46,32 +41,34 @@ public class ParkController extends HttpServlet {
 			tempUnit = "F";
 			session.setAttribute("tempUnit", tempUnit);
 		}
-		
+
 		map.addAttribute("listParks", listParks);
 		map.addAttribute("park", parkDao.getParkByCode(parkCode));
-		map.addAttribute("forecast", forecastDao.getForecastByParkCodes(parkCode));
-		
-		map.addAttribute("tempUnit", tempUnit);
-		
+		map.addAttribute("forecast", forecastDao.getForecastByParkCodes(parkCode, tempUnit));
+
 		return "parkDetail";
 	}
-		
-	@RequestMapping(path="/", method=RequestMethod.GET)
+
+	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String displayAllParks(ModelMap map) {
-		List<Park> listParks = parkDao.getAllParks();		
+		List<Park> listParks = parkDao.getAllParks();
 		map.put("listParks", listParks);
 		map.put("park", parkDao.getAllParks());
 		return "homePage";
 	}
-	
-	@RequestMapping(path="/temperature", method=RequestMethod.POST)
-	public String temperaturePreference(HttpSession session, @RequestParam String parkCode, ModelMap map) {
-		
-		
-		
-		return null;
+
+	@RequestMapping(path = "/temperature", method = RequestMethod.POST)
+	public String temperaturePreference(HttpSession session, @RequestParam String parkCode,
+			@RequestParam String temperature, ModelMap map) {
+		if (temperature.startsWith("F")) {
+			session.setAttribute("tempUnit", "F");
+		} else if (temperature.startsWith("C")) {
+			session.setAttribute("tempUnit", "C");
+
+		}
+		return "redirect:/parkDetail?parkCode=" + parkCode;
 	}
-	
+
 //	@RequestMapping(path = "/surveyResults", method = RequestMethod.GET)
 //	public String displayParksBySurveyresults(ModelMap map) {
 //
@@ -80,7 +77,7 @@ public class ParkController extends HttpServlet {
 //		return "/homePage";
 //
 //	}
-	
+
 //	@RequestMapping("/parkDetail")
 //	public String displayParkDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 //	
@@ -95,17 +92,14 @@ public class ParkController extends HttpServlet {
 //			return null;
 //		}
 //	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		listParks(request, response);
 	}
-	
-	
 
-	
 	private void listParks(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -126,6 +120,5 @@ public class ParkController extends HttpServlet {
 
 		listParks(request, response);
 	}
-	
-	
+
 }

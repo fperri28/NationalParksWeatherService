@@ -4,24 +4,23 @@ import java.util.List;
 
 public interface ForecastDAO {
 
-	
-	//Create
+	// Create
 	public Forecast addDay(Forecast newDay);
-	
-	//Read
+
+	// Read
 	public Forecast getForecastByValue(int fiveDayForecastValue);
-	
-	public Forecast getForecastByParkCode(String parkCode);
-	
+
+	public Forecast getForecastByParkCode(String parkCode, String tempUnit);
+
 	public Forecast getForecastByForecast(String forecast);
-	
-	public List<Forecast> getForecastByParkCodes(String parkCode);
-	
+
+	public List<Forecast> getForecastByParkCodes(String parkCode, String tempUnit);
+
 	public List<Forecast> getForecastByForecasts(String forecast);
-	
-	//Update
+
+	// Update
 	public void changeForecastData(Forecast updatedForecast);
-	
-	//Delete
+
+	// Delete
 	public void deleteDay(int fiveDayForecastValue, String parkCode);
 }

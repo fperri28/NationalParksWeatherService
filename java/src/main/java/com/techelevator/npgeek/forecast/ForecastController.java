@@ -16,8 +16,10 @@ public class ForecastController {
 	private ForecastDAO forecastDao;
 
 	@RequestMapping(path = "/forecast", method = RequestMethod.GET)
-	public String displayForecast(HttpSession session, @RequestParam String parkCode) {
-		session.setAttribute("forecast", forecastDao.getForecastByParkCodes(parkCode));
+	public String displayForecast(HttpSession session, @RequestParam String parkCode, @RequestParam String tempUnit,
+			ModelMap map) {
+
+		map.addAttribute("forecast", forecastDao.getForecastByParkCodes(parkCode, tempUnit));
 		return "forecast";
 	}
 
