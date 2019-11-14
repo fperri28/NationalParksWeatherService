@@ -11,6 +11,7 @@
 <body style=" background:#90EE90">
 	<header style=" background: green;">
 	<c:url value="/" var="homePageHref" />
+	<c:url value="/survey" var="surveyHref" />
     		<c:url value="/img/logo.png" var="logoSrc" />
         <a href="${homePageHref}">
         		<img style="width: 45%;" src="${logoSrc}" alt="National Parks Geek logo" />
@@ -42,24 +43,18 @@
   		<div class="table">
     	<ul id="horizontal-list">
             <li><a href="${homePageHref}">Home</a></li>
-            <li><a href="survey">Survey</a></li>
-<%--             <li><c:url var="formAction" value="/forecast" />
-				<form method="GET" action="${formAction}">
-					<div>
-						<label for="choosePark">Choose a park to view the five day forecast</label>
-						<select name="parkname">
-							<c:forEach items="${park}" var="park">
-
-								<option value=" ${park.parkCode}">${park.parkName}</option>
-
-							</c:forEach>
-
-
-						</select>
-					</div>
-					
-
-				</form></li>  --%>
+            <li><a href="${surveyHref}">Survey</a></li>
+            <li>
+            <form action="/parkDetail" method="GET">
+        	Please select a Park: 
+        		<select id="parkCode" name="parkCode">
+            	<c:forEach var="parks" items="${listParks}">
+                	<option value="${parks.parkCode}">${parks.parkName}</option>
+           		 </c:forEach>
+       			 </select>
+       			 <input type="submit" value="Go To Park"> 
+    		</form>
+    		</li>
         </ul>
         </div>
         </div>
@@ -67,12 +62,3 @@
         
     </nav>
 	
-		<form action="/parkDetail" method="GET">
-        Please select a Park: 
-        <select id="parkCode" name="parkCode">
-            <c:forEach var="parks" items="${listParks}">
-                <option value="${parks.parkCode}">${parks.parkName}</option>
-            </c:forEach>
-        </select>
-        <input type="submit" value="Go To Park"> 
-    </form>
