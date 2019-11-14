@@ -3,6 +3,7 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 
 <title>${park.parkName}</title>
@@ -83,7 +84,19 @@
 		</p> 
 		
 </c:forEach>
+<p>
+	<form:form action="${surveyUrl}" method="POST" modelAttribute="Survey">
+		<label for="activityLevel">Activity Level</label><br>
+        	<%-- <form:input  path="activityLevel" /> --%>
+        	<input type="radio" name="activityLevel" value="inactive">Inactive<br>
+        	<input type="radio" name="activityLevel" value="sedentary">Sedentary<br>
+        	<input type="radio" name="activityLevel" value="active">Active<br>
+        	<input type="radio" name="activityLevel" value="extremelyactive">Extremely Active<br>
+        	<br>
 
+
+</form:form>
+</p>
 	<form action="forecast" method="GET">
 				<div>		
 					<input type="hidden" name="parkCode" value ="${park.parkCode}"/>

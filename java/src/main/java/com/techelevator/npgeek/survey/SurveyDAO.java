@@ -14,7 +14,7 @@ public interface SurveyDAO {
 
 	public List<Survey> getAllSurveys();
 
-	public List<Survey> getSurveysByParkCode(String parkCode);
+	public List<Survey> getSurveysByParkCode();
 
 	// Update
 	public void changeSurveyData(Survey updatedSurvey);

@@ -26,7 +26,7 @@ public class JDBCSurveyDAO implements SurveyDAO {
 		Survey newSurvey = new Survey();
 
 		String sqlAddNewSurvey = "insert into survey_result (surveyId,parkcode, emailaddress, state, activitylevel) "
-				+ "values (?,?, ?, ?, ?)";
+				+ "values (?, ?, ?, ?, ?)";
 
 		newSurvey.setSurveyId(getNextSurveyId());
 		newSurvey.setParkCode(parkCode);
@@ -82,12 +82,16 @@ public class JDBCSurveyDAO implements SurveyDAO {
 	}
 
 	@Override
-	public List<Survey> getSurveysByParkCode(String parkCode) {
+	public List<Survey> getSurveysByParkCode() {
 		List<Survey> allSurveys = new ArrayList<Survey>();
 
-		String sqlListAllSurveysByParkCode = "select * from survey_result where parkcode = ?";
+		String sqlListAllSurveysByParkCode = 	"SELECT park.*, COUNT(*) as surveycount " + 
+												"FROM survey_result " + 
+												"INNER JOIN park on park.parkcode = survey_result.parkcode " + 
+												"GROUP BY park.parkcode " + 
+												"ORDER BY surveycount DESC";
 
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlListAllSurveysByParkCode, parkCode);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlListAllSurveysByParkCode);
 
 		while (results.next()) {
 			Survey aSurvey = mapRowToSurvey(results);

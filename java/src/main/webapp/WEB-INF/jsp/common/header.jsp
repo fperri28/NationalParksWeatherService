@@ -8,7 +8,7 @@
     <c:url value="/css/npgeek.css" var="cssHref" />
     <link rel="stylesheet" href="${cssHref}">
 </head>
-<body style=" background:#90EE90">
+<body >
 	<header style=" background: green;">
 	<c:url value="/" var="homePageHref" />
 	<c:url value="/survey" var="surveyHref" />
@@ -43,9 +43,9 @@
   		<div class="table">
     	<ul id="horizontal-list">
             <li><a href="${homePageHref}">Home</a></li>
-            <li><a href="${surveyHref}">Survey</a></li>
+            <li><a href="${surveyHref}">Take Our Survey</a></li>
             <li>
-            <form action="parkDetail" method="GET">
+            <form action="parkDetail" method="GET" style="color: white;">
         	Please select a Park: 
         		<select id="parkCode" name="parkCode">
             	<c:forEach var="parks" items="${listParks}">

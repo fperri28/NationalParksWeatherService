@@ -15,6 +15,7 @@
 <!-- Any names used in the form are assumed to match the POJO variable names -->
 <!-- the modelAttribute is automatically passed to the controller on "submit" -->
 
+<h2>Please take our Survey</h2>
 <form:form action="${surveyUrl}" method="POST" modelAttribute="Survey">
 
         <div>
@@ -28,9 +29,8 @@
        			 </select>
         		
         </div>
-        <div>
-        
-        </div>
+        <br>
+
 
         <div>
             <label for="emailAddress">Email</label>
@@ -38,12 +38,13 @@
         	<form:errors path="emailAddress" cssClass="error"/>
 
         </div>
+        <br>
         <div>
         	<label for="state">State of Residence</label>
         	<form:input type="state" path="state"/>
         	<form:errors path="state" cssClass="error"/>
         </div>
-       
+       <br>
 
         <div>
         	<label for="activityLevel">Activity Level</label><br>
@@ -52,7 +53,7 @@
         	<input type="radio" name="activityLevel" value="sedentary">Sedentary<br>
         	<input type="radio" name="activityLevel" value="active">Active<br>
         	<input type="radio" name="activityLevel" value="extremelyactive">Extremely Active<br>
-        	
+        	<br>
         		
         </div>
 

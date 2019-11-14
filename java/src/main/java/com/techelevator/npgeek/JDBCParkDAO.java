@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import com.techelevator.npgeek.survey.Survey;
+
 @Component
 public class JDBCParkDAO implements ParkDAO {
 
@@ -83,6 +85,27 @@ public class JDBCParkDAO implements ParkDAO {
 		}
 		return allParks;
 	}
+	
+	@Override
+	public List<Park> getSurveyCountByParkCode() {
+		List<Park> surveyCount = new ArrayList<Park>();
+
+		String sqlListAllSurveyCountByParkCode = 	"SELECT park.*, COUNT(*) as surveycount " + 
+												"FROM survey_result " + 
+												"INNER JOIN park on park.parkcode = survey_result.parkcode " + 
+												"GROUP BY park.parkcode " + 
+												"ORDER BY surveycount DESC";
+
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlListAllSurveyCountByParkCode);
+
+		while (results.next()) {
+			Park aPark = mapRowToPark(results);
+			aPark.setSurveycount(results.getInt("surveycount"));
+			surveyCount.add(aPark);
+		}
+
+		return surveyCount;
+	}
 
 //	-------------------------------	HELPER METHODS	---------------------------------
 
@@ -104,6 +127,7 @@ public class JDBCParkDAO implements ParkDAO {
 		thePark.setParkDescription(results.getString("parkDescription"));
 		thePark.setEntryFee(results.getBigDecimal("entryFee"));
 		thePark.setNumberOfAnimalSpecies(results.getInt("numberOfAnimalSpecies"));
+
 
 		return thePark;
 	}

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.techelevator.npgeek.forecast.ForecastDAO;
+import com.techelevator.npgeek.survey.SurveyDAO;
 
 
 @Controller
@@ -35,6 +36,7 @@ public class ParkController extends HttpServlet {
 	
 	@Autowired
 	private ForecastDAO forecastDao;
+	
 
 	@RequestMapping(path = "/parkDetail", method = RequestMethod.GET)
 	public String displayDetail(HttpSession session, @RequestParam String parkCode) {
@@ -52,6 +54,15 @@ public class ParkController extends HttpServlet {
 		map.put("park", parkDao.getAllParks());
 		return "homePage";
 	}
+	
+//	@RequestMapping(path = "/surveyResults", method = RequestMethod.GET)
+//	public String displayParksBySurveyresults(ModelMap map) {
+//
+//		map.put("post", parkDao.getSurveyCountByParkCode());
+//
+//		return "/homePage";
+//
+//	}
 	
 //	@RequestMapping("/parkDetail")
 //	public String displayParkDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {

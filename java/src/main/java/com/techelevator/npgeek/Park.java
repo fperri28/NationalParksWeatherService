@@ -19,6 +19,14 @@ public class Park {
 	private String parkDescription;
 	private BigDecimal entryFee;
 	private int numberOfAnimalSpecies;
+	private int surveycount;
+	
+	public int getSurveycount() {
+		return surveycount;
+	}
+	public void setSurveycount(int surveycount) {
+		this.surveycount = surveycount;
+	}
 	
 	
 	public String getParkCode() {
@@ -111,7 +119,6 @@ public class Park {
 	public void setNumberOfAnimalSpecies(int numberOfAnimalSpecies) {
 		this.numberOfAnimalSpecies = numberOfAnimalSpecies;
 	}
-	
 	@Override
 	public String toString() {
 		return "Park [parkCode=" + parkCode + ", parkName=" + parkName + ", state=" + state + ", acreage=" + acreage
@@ -119,7 +126,7 @@ public class Park {
 				+ numberOfCampsites + ", climate=" + climate + ", yearFounded=" + yearFounded + ", annualVisitorCount="
 				+ annualVisitorCount + ", inspirationalQuote=" + inspirationalQuote + ", inspirationalQuoteSource="
 				+ inspirationalQuoteSource + ", parkDescription=" + parkDescription + ", entryFee=" + entryFee
-				+ ", numberOfAnimalSpecies=" + numberOfAnimalSpecies + "]";
+				+ ", numberOfAnimalSpecies=" + numberOfAnimalSpecies + ", surveycount=" + surveycount + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -141,10 +148,10 @@ public class Park {
 		result = prime * result + ((parkDescription == null) ? 0 : parkDescription.hashCode());
 		result = prime * result + ((parkName == null) ? 0 : parkName.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		result = prime * result + surveycount;
 		result = prime * result + yearFounded;
 		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -206,10 +213,14 @@ public class Park {
 				return false;
 		} else if (!state.equals(other.state))
 			return false;
+		if (surveycount != other.surveycount)
+			return false;
 		if (yearFounded != other.yearFounded)
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 	

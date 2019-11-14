@@ -17,5 +17,7 @@ public interface ParkDAO {
 	public List<Park> getAllParks(); // Return all the Park
 	// Updates
 
+	List<Park> getSurveyCountByParkCode();
+
 	// Delete
 }

@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.techelevator.npgeek.ParkDAO;
+
 @Controller
 public class SurveyController {
 
 	@Autowired
 	private SurveyDAO surveyDao;
+	
+	@Autowired
+	private ParkDAO parkDao;
 
 	@RequestMapping(path = "/survey", method = RequestMethod.GET)
 	public String showSurveyForm(Model modelHolder) {
@@ -27,9 +32,10 @@ public class SurveyController {
 			@RequestParam String state, @RequestParam String activityLevel, ModelMap map) {
 
 		surveyDao.addSurvey(parkCode, emailAddress, state, activityLevel);
-		map.put("post", surveyDao.getAllSurveys());
 
-		return "/parkDetail";
+		map.put("post", parkDao.getSurveyCountByParkCode());
+
+		return "/surveyResults";
 
 	}
 
