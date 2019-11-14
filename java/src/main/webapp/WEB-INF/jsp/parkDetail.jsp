@@ -85,17 +85,15 @@
 		
 </c:forEach>
 <p>
-	<form:form action="${surveyUrl}" method="POST" modelAttribute="Survey">
-		<label for="activityLevel">Activity Level</label><br>
-        	<%-- <form:input  path="activityLevel" /> --%>
-        	<input type="radio" name="activityLevel" value="inactive">Inactive<br>
-        	<input type="radio" name="activityLevel" value="sedentary">Sedentary<br>
-        	<input type="radio" name="activityLevel" value="active">Active<br>
-        	<input type="radio" name="activityLevel" value="extremelyactive">Extremely Active<br>
+<%-- 	<form:form action="${ }" method="POST" modelAttribute="Temperature">
+		<label for="temperature">Temperature</label><br>
+        	<form:input  path="activityLevel" />
+        	<input type="radio" name="temperature" value="Fahrenheit">Fahrenheit<br>
+        	<input type="radio" name="temperature" value="Celsius">Celsius<br>
+
         	<br>
 
-
-</form:form>
+	</form:form> --%>
 </p>
 	<form action="forecast" method="GET">
 				<div>		
