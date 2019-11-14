@@ -45,7 +45,7 @@
             <li><a href="${homePageHref}">Home</a></li>
             <li><a href="${surveyHref}">Survey</a></li>
             <li>
-            <form action="/parkDetail" method="GET">
+            <form action="parkDetail" method="GET">
         	Please select a Park: 
         		<select id="parkCode" name="parkCode">
             	<c:forEach var="parks" items="${listParks}">

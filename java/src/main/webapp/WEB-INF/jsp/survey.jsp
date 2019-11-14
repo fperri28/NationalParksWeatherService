@@ -19,29 +19,41 @@
 
         <div>
         	<label for="parkCode">Favorite National Park</label>
-        	<form:input  path="parkCode" />
-        	<form:errors path="parkCode"  cssClass="error"/>
+        	
+   
+        		<select id="parkCode" name="parkCode">
+            	<c:forEach var="parks" items="${listParks}">
+                	<option value="${parks.parkCode}">${parks.parkName}</option>
+           		 </c:forEach>
+       			 </select>
         		
+        </div>
+        <div>
+        
         </div>
 
         <div>
             <label for="emailAddress">Email</label>
 			<form:input  type="emailAddress" path="emailAddress" />            
         	<form:errors path="emailAddress" cssClass="error"/>
-<%--         	<form:errors path="emailMatching" cssClass="error"/>
-        </div>
 
+        </div>
         <div>
-            <label for="verifyEmail">Verify Email</label>
-            <form:input  type="emailAddress" path="verifyEmail" />
-            <form:errors path="verifyEmail" cssClass="error"/> --%>
+        	<label for="state">State of Residence</label>
+        	<form:input type="state" path="state"/>
+        	<form:errors path="state" cssClass="error"/>
         </div>
        
 
         <div>
-        	<label for="activityLevel">Activity Level</label>
-        	<form:input  path="activityLevel" />
-        	<form:errors path="activityLevel"  cssClass="error"/>	
+        	<label for="activityLevel">Activity Level</label><br>
+        	<%-- <form:input  path="activityLevel" /> --%>
+        	<input type="radio" name="activityLevel" value="inactive">Inactive<br>
+        	<input type="radio" name="activityLevel" value="sedentary">Sedentary<br>
+        	<input type="radio" name="activityLevel" value="active">Active<br>
+        	<input type="radio" name="activityLevel" value="extremelyactive">Extremely Active<br>
+        	
+        		
         </div>
 
         
