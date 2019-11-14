@@ -15,14 +15,21 @@ font-family: helvetica;
     
 <h2>${park.parkName}</h2>
 	<div style="font-family: helvetica; font-size: 20px;" >
-		<p>
+		<table>
+		<tr>
+
+		<td>
 			<img src="/m3-java-capstone/img/parks/${fn:toLowerCase(park.parkCode)}.jpg"/>
-		</p>
-		<p style="font-style: italic;">
+		</td>
+		<td>
+		</td>
+		<td style="font-style: italic; width: 500px;">
 			<c:out value="${park.parkDescription}" />
-		</p>
+		</td>
+		</tr>
+		</table>
 		<p>
-			<c:out value="State: ${park.state}" />
+			<strong>State: </strong><c:out value="${park.state}" />
 		</p>
 		<p>
 			<c:out value=" ${park.acreage} acres"  />
@@ -94,15 +101,22 @@ font-family: helvetica;
 		
 </c:forEach>
 <p>
-<%-- 	<form:form action="${ }" method="POST" modelAttribute="Temperature">
+
+
+
+
+	 <c:url value="/temperature" var="temperatureUrl" >
+	 	<c:param name = "parkCode">${park.parkCode }</c:param>
+	 </c:url>
+ 	<form:form action="${temperatureUrl}" method="POST">
 		<label for="temperature">Temperature</label><br>
-        	<form:input  path="activityLevel" />
-        	<input type="radio" name="temperature" value="Fahrenheit">Fahrenheit<br>
+        	<form:input  path="temperature" />
+        	<input checked type="radio" name="temperature" value="Fahrenheit">Fahrenheit<br>
         	<input type="radio" name="temperature" value="Celsius">Celsius<br>
 
         	<br>
 
-	</form:form> --%>
+	</form:form>   
 </p>
 	<form action="forecast" method="GET">
 				<div>		

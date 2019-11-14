@@ -39,11 +39,20 @@ public class ParkController extends HttpServlet {
 	
 
 	@RequestMapping(path = "/parkDetail", method = RequestMethod.GET)
-	public String displayDetail(HttpSession session, @RequestParam String parkCode) {
+	public String displayDetail(HttpSession session, @RequestParam String parkCode, ModelMap map) {
 		List<Park> listParks = parkDao.getAllParks();
-		session.setAttribute("listParks", listParks);
-		session.setAttribute("park", parkDao.getParkByCode(parkCode));
-		session.setAttribute("forecast", forecastDao.getForecastByParkCodes(parkCode));
+		String tempUnit = (String) session.getAttribute("tempUnit");
+		if (tempUnit == null) {
+			tempUnit = "F";
+			session.setAttribute("tempUnit", tempUnit);
+		}
+		
+		map.addAttribute("listParks", listParks);
+		map.addAttribute("park", parkDao.getParkByCode(parkCode));
+		map.addAttribute("forecast", forecastDao.getForecastByParkCodes(parkCode));
+		
+		map.addAttribute("tempUnit", tempUnit);
+		
 		return "parkDetail";
 	}
 		
@@ -53,6 +62,14 @@ public class ParkController extends HttpServlet {
 		map.put("listParks", listParks);
 		map.put("park", parkDao.getAllParks());
 		return "homePage";
+	}
+	
+	@RequestMapping(path="/temperature", method=RequestMethod.POST)
+	public String temperaturePreference(HttpSession session, @RequestParam String parkCode, ModelMap map) {
+		
+		
+		
+		return null;
 	}
 	
 //	@RequestMapping(path = "/surveyResults", method = RequestMethod.GET)
