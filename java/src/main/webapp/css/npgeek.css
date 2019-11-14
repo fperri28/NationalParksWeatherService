@@ -1,1 +1,75 @@
-@charset "UTF-8";
+nav h2 {
+	text-align: center;
+	padding-left: 60px;
+}
+
+nav p {
+	text-align: center;
+	/*font-size: 12pt;*/
+	font-style: italic;
+	padding-left: 60px;
+}
+
+ul {
+	text-align: center;
+	padding-left: 80px;
+}
+
+li {
+	display: inline-block;
+
+}
+
+li a {
+	color: white;
+	text-decoration: none;
+	/*font-size: 20pt;*/
+	list-style: none;
+	text-align: center;
+	vertical-align: middle;
+}
+
+nav ul {
+	text-align: center;
+	width: 100%;
+}
+
+nav ul li {
+	display: inline-block;
+	float: left;
+	margin-right: 20px;
+	background-color: green;
+	border-radius: 8px;
+	list-style: none;
+	text-align: center;
+	width: 200px;
+
+}
+
+nav:after {
+	clear: both;
+}
+
+li a:hover {
+	text-decoration: underline;
+}
+
+#menu-outer {
+	height: 84px;
+	background: url(images/bar-bg.jpg) repeat-x;
+}
+
+.table {
+	display: table;   /* Allow the centering to work */
+	margin: 0 auto;
+}
+
+ul#horizontal-list {
+	min-width: 696px;
+	list-style: none;
+}
+
+ul#horizontal-list li {
+		display: inline;
+}
+

@@ -6,8 +6,7 @@
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 
 <title>${park.parkName}</title>
-
-
+    
 <h2>${park.parkName}</h2>
 	<div >
 		<p>
@@ -53,46 +52,38 @@
 			<c:out value="Number of Animal Species: ${park.numberOfAnimalSpecies}"  />
 		</p>
 
-<div>
+<div style="background: blue;">
 <c:forEach begin="0" end="0" items="${forecast}" var="forecast">
+		
+		<p>Today's Forecast:
+			<c:set var="message" />
+			<c:choose>
+				<c:when test="${forecast.high > 75}"> Bring an extra gallon of water.</c:when>
+				<c:when test="${forecast.high - forecast.low > 20}"> Wear breathable layers. </c:when>
+				<c:when test="${forecast.low < 20}"> Visit with caution, we cannot be held responsible for frost bite. </c:when>
+				<c:otherwise> Expect moderate temperatures today.</c:otherwise>
+			</c:choose>
 
+			<c:set var="weather" />
+			<c:choose>
+				<c:when test="${forecast.forecast.equals('rain')}"> It's going to rain, pack rain gear and wear waterproof shoes. </c:when>
+				<c:when test="${forecast.forecast.equals('snow')}"> It's going to snow, pack snow shoes. </c:when>
+				<c:when test="${forecast.forecast.equals('thunderstorms')}"> It's going to thunderstorm, seek shelter and avoid hiking on exposed ridges. </c:when>
+				<c:when test="${forecast.forecast.equals('sunny')}"> It's going to be sunny, pack sunblock. </c:when>
+				<c:otherwise> Expect clear skies. </c:otherwise>
+			</c:choose>
+		</p>
 
 		<p> <img src = "/m3-java-capstone/img/weather/${forecast.forecast}.png"/>
 		</p>
 
-		<p><c:out value="${forecast.high}"/>
+		<p>High: <c:out value="${forecast.high}"/>º
 		</p>
-		<p><c:out value="${forecast.low}"/>
+		<p>Low: <c:out value="${forecast.low}"/>º
 		</p> 
 		
-		<p>
-			<c:set var="message" />
-			<c:choose>
-				<c:when test="${forecast.high > 75}"> Bring an extra gallon of water</c:when>
-				<c:when test="${forecast.high - forecast.low > 20}"> Wear breathable layers </c:when>
-				<c:when test="${forecast.low < 20}"> Visit with caution, we cannot be held responsible for frost bite </c:when>
-				<c:otherwise> Look forward to a wonderful day in the Parks System. Have Fun! </c:otherwise>
-			</c:choose>
-			</p>
-
-		<p>
-			<c:set var="weather" />
-			<c:choose>
-				<c:when test="${forecast.forecast.equals('rain')}"> It's going to rain, pack rain gear and wear waterproof shoes </c:when>
-				<c:when test="${forecast.forecast.equals('snow')}"> It's going to snow, pack snow shoes </c:when>
-				<c:when test="${forecast.forecast.equals('thunderstorms')}"> It's going to thunderstorm, seek shelter and avoid hiking on exposed ridges </c:when>
-				<c:when test="${forecast.forecast.equals('sunny')}"> It's going to be sunny, pack sunblock </c:when>
-				<c:otherwise> Look forward to a wonderful day in the Parks System. Have Fun! </c:otherwise>
-			</c:choose>
-		</p>	
-		
-
 </c:forEach>
-</div>
 
-
-
-<div>
 	<form action="forecast" method="GET">
 				<div>		
 					<input type="hidden" name="parkCode" value ="${park.parkCode}"/>
