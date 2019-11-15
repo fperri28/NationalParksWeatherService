@@ -93,8 +93,30 @@ public class JDBCForecastDAO implements ForecastDAO {
 		theForecast.setFiveDayForecastValue(results.getInt("fiveDayForecastValue"));
 		theForecast.setLow(tempUnit.equals("C") ? (results.getInt("low") - 32) * 5 / 9 : results.getInt("low"));
 		theForecast.setHigh(tempUnit.equals("C") ? (results.getInt("high") - 32) * 5 / 9 : results.getInt("high"));
-		theForecast.setForecast(results.getString("forecast"));
+		if (results.getString("forecast").contains(" ")) {
+			System.out.println("Forecast has a space in it");
 
+			String forecastString = results.getString("forecast");
+
+			String[] forecastArray = forecastString.split(" ");
+			for (int i = 0; i < forecastArray.length; i++) {
+				if (i != 0) {
+					String nextWord = forecastArray[i];
+					nextWord = nextWord.substring(0, 1).toUpperCase() + nextWord.substring(1);
+					forecastArray[i] = nextWord;
+				}
+
+			}
+			String newForecast = "";
+			for (int i = 0; i < forecastArray.length; i++) {
+				newForecast += forecastArray[i];
+			}
+
+			theForecast.setForecast(newForecast);
+
+		} else {
+			theForecast.setForecast(results.getString("forecast"));
+		}
 		return theForecast;
 	}
 

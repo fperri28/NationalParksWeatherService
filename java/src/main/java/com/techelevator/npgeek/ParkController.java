@@ -42,7 +42,7 @@ public class ParkController extends HttpServlet {
 			session.setAttribute("tempUnit", tempUnit);
 		}
 
-		map.addAttribute("listParks", listParks);
+		session.setAttribute("listParks", listParks);
 		map.addAttribute("park", parkDao.getParkByCode(parkCode));
 		map.addAttribute("forecast", forecastDao.getForecastByParkCodes(parkCode, tempUnit));
 
@@ -50,10 +50,11 @@ public class ParkController extends HttpServlet {
 	}
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
-	public String displayAllParks(ModelMap map) {
+	public String displayAllParks(HttpSession session, ModelMap map) {
 		List<Park> listParks = parkDao.getAllParks();
-		map.put("listParks", listParks);
+//		map.put("listParks", listParks);
 		map.put("park", parkDao.getAllParks());
+		session.setAttribute("listParks", listParks);
 		return "homePage";
 	}
 
