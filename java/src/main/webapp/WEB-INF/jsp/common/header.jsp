@@ -12,7 +12,10 @@
 	<header style=" background: green;">
 	<c:url value="/" var="homePageHref" />
 	<c:url value="/survey" var="surveyHref" />
-    		<c:url value="/img/logo.png" var="logoSrc" />
+	<c:url value="/login" var="loginHref"/>
+	<c:url value="/register" var="registerHref"/>
+	
+     		<c:url value="/img/logo.png" var="logoSrc" />
         <a href="${homePageHref}">
         		<img style="width: 45%;" src="${logoSrc}" alt="National Parks Geek logo" />
         </a>
@@ -55,6 +58,8 @@
        			 <input type="submit" value="Go To Park"> 
     		</form>
     		</li>
+    		<li><a href="${registerHref}">Register</a></li>
+    		<li><a href="${loginHref}">Login</a></li>
         </ul>
         </div>
         </div>
