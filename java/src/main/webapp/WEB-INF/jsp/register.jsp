@@ -3,23 +3,41 @@
     
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <c:url value="/register" var="registerUrl" />
-<form:form action="${registerUrl}" method="POST" modelAttribute="Register">
- <div>
-        	<label for="emailAddress">Email</label>
-        	<form:input  path="emailAddress"  />
-        	<form:errors path="emailAddress"  cssClass="error"/>
-        	
-        		
-        </div>
-        <div>
-        	<label for="password">Password</label>
-        	<form:input  path="password"  />
-        	<form:errors path="password"  cssClass="error"/>
-        		
-        </div>
-        <div>
-        <input type="submit" value="Submit"/>
-        </div>
+<div style="display:flex; font-family: helvetica;">
+
+<form:form action="${registerUrl}" method="POST"
+	modelAttribute="Register">
+
+	<br>
+	<br>
+		<div>Register to Join the National Parks Weather Service</div>
+	<br>
+	<br>
+
+
+	<div>
+		<label for="emailAddress">Email</label>
+		<form:input path="emailAddress" type="text" />
+		<form:errors path="emailAddress" cssClass="error" />
+
+	</div>
+	<br>
+	<br>
+
+	<div>
+		<label for="password">Password</label>
+		<form:input path="password" type="text" />
+		<form:errors path="password" cssClass="error" />
+
+	</div>
+
+	<br>
+	<br>
+
+	<div>
+		<input type="submit" value="Submit" />
+	</div>
 </form:form>
+</div>
 </body>
 </html>

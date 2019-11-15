@@ -46,15 +46,15 @@ grid-item {
   
 </style>
 
-
-<title>Welcome to the National Parks Weather Service</title>
-
 <section>
 	<div
 		style="padding: 10px; text-align: center; font-family: helvetica; font-size: 20px;">
 		<p>Welcome to the National Parks Weather Service!</p>
 	</div>
-
+<div style="font-family: helvetica; font-size: 20px;">	
+ <h2>Explore The National Parks System</h2>
+<p> Use these state of the art web applications to learn more about the National Parks Weather Service! </p>
+</div>
 
 	<div class="grid-container">
 

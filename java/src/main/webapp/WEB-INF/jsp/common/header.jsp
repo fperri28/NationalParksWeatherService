@@ -8,46 +8,28 @@
     <c:url value="/css/npgeek.css" var="cssHref" />
     <link rel="stylesheet" href="${cssHref}">
 </head>
-<body >
+<body>
+
 	<header style=" background: green;">
 	<c:url value="/" var="homePageHref" />
 	<c:url value="/survey" var="surveyHref" />
 	<c:url value="/login" var="loginHref"/>
 	<c:url value="/register" var="registerHref"/>
 	
-     		<c:url value="/img/logo.png" var="logoSrc" />
-        <a href="${homePageHref}">
-        		<img style="width: 45%;" src="${logoSrc}" alt="National Parks Geek logo" />
+     	 <c:url value="/img/logo.png" var="logoSrc" />
+        <a id="logo" href="${homePageHref}">
+        	<img style="width: 45%;" src="${logoSrc}" alt="National Parks Geek logo" />
         </a>
 	</header>
 	
-<%-- 	<div align="center">
-    <h2>Dynamic Drop Down List </h2>
-    <form action="list" method="GET">
-        Select a Park:&nbsp;
-        <select name="park">
-            <c:forEach items="${listParks}" var="park">
-                <option value="${park.parkName}"
-                    <c:if test="${park.parkName eq selectedParkName}">selected="selected"</c:if>
-                    >
-                    ${park.parkName}
-                </option>
-            </c:forEach>
-        </select>
-        <br/><br/>
-        <input type="submit" value="Submit" />
-    </form>
-</div> --%>
+
+<div class="topnav">
 	<nav>
-        <h2>Explore The National Parks System</h2>
-        <p> Use these state of the art web applications to learn more about the National Parks Weather Service! </p>
-        
-        <div id="menu-outer">
-  		<div class="table">
-    	<ul id="horizontal-list">
-            <li><a href="${homePageHref}">Home</a></li>
-            <li><a href="${surveyHref}">Take Our Survey</a></li>
-            <li>
+            <a href="${homePageHref}">Home</a>
+            <a href="${surveyHref}">Take Our Survey</a>
+            
+            <div class="topnav-centered" style="hover: none;">
+            <a>
             <form action="parkDetail" method="GET" style="color: white;">
         	Please select a Park: 
         		<select id="parkCode" name="parkCode">
@@ -57,13 +39,14 @@
        			 </select>
        			 <input type="submit" value="Go To Park"> 
     		</form>
-    		</li>
-    		<li><a href="${registerHref}">Register</a></li>
-    		<li><a href="${loginHref}">Login</a></li>
-        </ul>
-        </div>
-        </div>
-        
-        
+    		</a>
+    		</div>
+    		
+    		<div class="topnav-right">
+    			<a href="${registerHref}">Register</a>
+    			<a href="${loginHref}">Login</a>
+        	</div>
+ 
     </nav>
-	
+</div>
+

@@ -3,8 +3,9 @@
     
 <c:import url="/WEB-INF/jsp/common/header.jsp"/>
 <c:url value="/confirmation" var="confirmationUrl" />
+<div style="font-family: helvetica;">
 <h1>Confirmation</h1>
 <c:out value="${message}"/>
-
+</div>
 </body>
 </html>
