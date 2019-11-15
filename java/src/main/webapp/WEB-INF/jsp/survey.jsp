@@ -15,7 +15,8 @@
 <!-- The modelAttribute identifies a POJO that is auto-magically connected to a form -->
 <!-- Any names used in the form are assumed to match the POJO variable names -->
 <!-- the modelAttribute is automatically passed to the controller on "submit" -->
-
+<br>
+<br>
 <h2 style="font-family: helvetica;">Please take our Survey</h2>
 <form:form action="${surveyUrl}" method="POST" modelAttribute="Survey">
 

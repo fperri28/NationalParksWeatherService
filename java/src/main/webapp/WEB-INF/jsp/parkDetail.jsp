@@ -13,6 +13,8 @@ font-family: helvetica;
 
 <title>${park.parkName}</title>
     
+   <br>
+   <br>
 <h2>${park.parkName}</h2>
 	<div style="font-family: helvetica; font-size: 20px;" >
 		<table>
@@ -69,10 +71,30 @@ font-family: helvetica;
 			<c:out value="Number of Animal Species: ${park.numberOfAnimalSpecies}"  />
 		</p>
 
-<div style="background: blue; font-family: helvetica;">
+<div style="background: tan; font-family: helvetica;">
+<table border="1">
+
 <c:forEach begin="0" end="0" items="${forecast}" var="forecast">
+		<br>
+		<tr>
+		<td align="center" style="background: blue;"> <h3>Today's Forecast</h3>
+
+		</td>
+		</tr>
+
+		<tr>
+		<td align="center" style="background: white;"> <img src = "/m3-java-capstone/img/weather/${forecast.forecast}.png"/>
+		</td>
+		</tr>
+
+		<tr>
+		<td align="center">High: <c:out value="${forecast.high}"/>º
+		<br>Low: <c:out value="${forecast.low}"/>º
+		</td>
+		</tr> 
 		
-		<p>Today's Forecast:
+		<tr>
+		<td align="center"> 
 			<c:set var="message" />
 			<c:choose>
 				<c:when test="${forecast.high > 75}"> Bring an extra gallon of water.</c:when>
@@ -80,7 +102,7 @@ font-family: helvetica;
 				<c:when test="${forecast.low < 20}"> Visit with caution! We cannot be held responsible for frostbite. </c:when>
 				<c:otherwise> Expect moderate temperatures today.</c:otherwise>
 			</c:choose>
-
+		<br>
 			<c:set var="weather" />
 			<c:choose>
 				<c:when test="${forecast.forecast.equals('rain')}"> It's going to rain. Pack rain gear and wear waterproof shoes. </c:when>
@@ -88,30 +110,22 @@ font-family: helvetica;
 				<c:when test="${forecast.forecast.equals('thunderstorms')}"> It's going to thunderstorm. Seek shelter and avoid hiking on exposed ridges. </c:when>
 				<c:when test="${forecast.forecast.equals('sunny')}"> It's going to be sunny. Pack sunblock. </c:when>
 				<c:otherwise> Expect clear skies. </c:otherwise>
-			</c:choose>
-		</p>
-
-		<p> <img src = "/m3-java-capstone/img/weather/${forecast.forecast}.png"/>
-		</p>
-
-		<p>High: <c:out value="${forecast.high}"/>º
-		</p>
-		<p>Low: <c:out value="${forecast.low}"/>º
-		</p> 
+			</c:choose>		
+		
+		</td>
+		</tr>
 		
 </c:forEach>
+
+</table>
+
 <p>
-
-
-
-
 	 <c:url value="/temperature" var="temperatureUrl" >
 	 	<c:param name = "parkCode">${park.parkCode }</c:param>
 	 </c:url>
  	<form:form action="${temperatureUrl}" method="POST">
-		<label for="temperature">Temperature</label><br>
-     <%--    	<form:input  path="temperature" /> --%>
-        	<input checked type="radio" name="temperature" value="Fahrenheit">Fahrenheit<br>
+		<label for="temperature">Temperature Preference</label><br>
+        	<input  type="radio" name="temperature" value="Fahrenheit">Fahrenheit<br>
         	<input type="radio" name="temperature" value="Celsius">Celsius<br>
         	<input type="submit" value= "Change temperature preference">
 
@@ -119,21 +133,34 @@ font-family: helvetica;
 
 	</form:form>   
 </p>
-	<c:forEach begin="1" end="5" items="${forecast}" var="forecast">
 
-	<p>
-	<c:out value="${forecast.fiveDayForecastValue }"/>
-	</p>
-		<p> <img src = "/m3-java-capstone/img/weather/${forecast.forecast}.png"/>
-		</p>
+<table border="1">
+<tr><th> 5 Day Forecast </th></tr>
 
-		<p><c:out value="High: ${forecast.high}"/>º
-		</p>
-		<p><c:out value="Low: ${forecast.low}"/>º
-		</p> 
+		<tr>
+		
+		<c:forEach begin="1" end="5" items="${forecast}" var="forecast">
+			<td align="center">	
+				<img style="width: 180px;" src = "/m3-java-capstone/img/weather/${forecast.forecast}.png"/>
+			</td>
+		</c:forEach>
+		
+		</tr>
+
+		<tr>
+		<c:forEach begin="1" end="5" items="${forecast}" var="forecast">
+			<td align="center">
+				<c:out value="High: ${forecast.high}"/>º
+				<c:out value="Low: ${forecast.low}"/>º
+			</td>	
+		</c:forEach>
+		</tr> 
 
 
-</c:forEach>
+
+</table>
+
+
 </div>
 
 </div>
