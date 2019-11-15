@@ -94,7 +94,6 @@ public class JDBCForecastDAO implements ForecastDAO {
 		theForecast.setLow(tempUnit.equals("C") ? (results.getInt("low") - 32) * 5 / 9 : results.getInt("low"));
 		theForecast.setHigh(tempUnit.equals("C") ? (results.getInt("high") - 32) * 5 / 9 : results.getInt("high"));
 		if (results.getString("forecast").contains(" ")) {
-			System.out.println("Forecast has a space in it");
 
 			String forecastString = results.getString("forecast");
 

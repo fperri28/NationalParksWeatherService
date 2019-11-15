@@ -96,12 +96,16 @@ font-family: helvetica;
 		<tr>
 		<td align="center"> 
 			<c:set var="message" />
-			<c:choose>
-				<c:when test="${forecast.high > 75}"> Bring an extra gallon of water.</c:when>
-				<c:when test="${forecast.high - forecast.low > 20}"> Wear breathable layers. </c:when>
-				<c:when test="${forecast.low < 20}"> Visit with caution! We cannot be held responsible for frostbite. </c:when>
-				<c:otherwise> Expect moderate temperatures today.</c:otherwise>
-			</c:choose>
+			<c:if test="${forecast.high > 75}">
+					Bring an extra gallon of water.
+			</c:if>
+			<c:if test="${forecast.high - forecast.low > 20}">
+					Wear breathable layers. 
+			</c:if>
+			<c:if test="${forecast.low < 20}">
+					Visit with caution! We cannot be held responsible for frostbite. 
+			</c:if>
+			
 		<br>
 			<c:set var="weather" />
 			<c:choose>
