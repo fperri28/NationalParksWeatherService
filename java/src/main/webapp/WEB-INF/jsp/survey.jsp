@@ -104,7 +104,7 @@
         <div>
         	<label for="activityLevel">Activity Level</label><br>
         	<%-- <form:input  path="activityLevel" /> --%>
-        	<input type="radio" name="activityLevel" value="inactive">Inactive<br>
+        	<input checked="checked" type="radio" name="activityLevel" value="inactive">Inactive<br>
         	<input type="radio" name="activityLevel" value="sedentary">Sedentary<br>
         	<input type="radio" name="activityLevel" value="active">Active<br>
         	<input type="radio" name="activityLevel" value="extremelyactive">Extremely Active<br>

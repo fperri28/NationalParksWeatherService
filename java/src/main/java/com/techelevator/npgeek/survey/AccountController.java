@@ -1,5 +1,8 @@
 package com.techelevator.npgeek.survey;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.techelevator.npgeek.Park;
+import com.techelevator.npgeek.ParkDAO;
+
 @Controller
 public class AccountController {
+	
 	@Autowired
 	private UserDAO userDao;
+	
+	@Autowired
+	private ParkDAO parkDao;
 
 	@RequestMapping(path = "/register", method = RequestMethod.GET)
 	public String register(ModelMap modelHolder) {
@@ -31,6 +41,12 @@ public class AccountController {
 		if (result.hasErrors()) {
 			flash.addFlashAttribute(BindingResult.MODEL_KEY_PREFIX + "Register", result);
 			flash.addFlashAttribute("Register", regFormValues);
+			
+			String email = regFormValues.getEmailAddress();
+			String password = regFormValues.getPassword();
+			
+			userDao.addUser(email, password);
+			
 			return "redirect:/register";
 
 		}
@@ -61,7 +77,10 @@ public class AccountController {
 	}
 
 	@RequestMapping(path = "/confirmation", method = RequestMethod.GET)
-	public String showConfirmationView() {
+	public String showConfirmationView(HttpSession session) {
+		List<Park> listParks = parkDao.getAllParks();
+		
+		session.setAttribute("listParks", listParks);
 		return "confirmation";
 	}
 }

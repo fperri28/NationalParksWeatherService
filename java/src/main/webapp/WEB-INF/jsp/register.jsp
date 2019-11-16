@@ -26,7 +26,7 @@
 
 	<div>
 		<label for="password">Password</label>
-		<form:input path="password" type="text" />
+		<form:password path="password" />
 		<form:errors path="password" cssClass="error" />
 
 	</div>

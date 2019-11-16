@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class User {
+	
 	@NotBlank(message = "Email is required")
 	@Email(message = "Please enter a valid email address")
 	private String emailAddress;

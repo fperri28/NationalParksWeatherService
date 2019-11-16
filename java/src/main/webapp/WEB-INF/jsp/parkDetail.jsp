@@ -53,6 +53,13 @@ h2 {
 	<p>
 		<c:out value=" ${park.annualVisitorCount} vistors per year" />
 	</p>
+	<p>
+		<c:out value="Number of Animal Species: ${park.numberOfAnimalSpecies}" />
+	</p>
+	<p>
+		<c:out value="Entry Fee: $${park.entryFee}" />
+	</p>
+	
 	<br> <br>
 	<p style="font-style: italic;">
 		<c:out value="${park.inspirationalQuote}" />
@@ -61,12 +68,7 @@ h2 {
 		<c:out value="-- ${park.inspirationalQuoteSource}" />
 	</p>
 	<br> <br>
-	<p>
-		<c:out value="Entry Fee: $${park.entryFee}" />
-	</p>
-	<p>
-		<c:out value="Number of Animal Species: ${park.numberOfAnimalSpecies}" />
-	</p>
+
 
 	<div style="background: tan; font-family: helvetica;">
 		<table style="display: inline-block; border: 1px solid; float: left; height: auto; background: #0b98de;">
@@ -92,21 +94,31 @@ h2 {
 				</tr>
 
 				<tr>
-					<td align="center"><c:set var="message" /> <c:if
-							test="${forecast.high > 75}">
-					Bring an extra gallon of water.
-			</c:if> <c:if test="${forecast.high - forecast.low > 20}">
-					Wear breathable layers. 
-			</c:if> <c:if test="${forecast.low < 20}">
-					Visit with caution! We cannot be held responsible for frostbite. 
-			</c:if> <br> <c:set var="weather" /> <c:choose>
-							<c:when test="${forecast.forecast.equals('rain')}"> It's going to rain. Pack rain gear and wear waterproof shoes. </c:when>
-							<c:when test="${forecast.forecast.equals('snow')}"> It's going to snow. Pack snowshoes. </c:when>
-							<c:when test="${forecast.forecast.equals('thunderstorms')}"> It's going to thunderstorm. Seek shelter and avoid hiking on exposed ridges. </c:when>
-							<c:when test="${forecast.forecast.equals('sunny')}"> It's going to be sunny. Pack sunblock. </c:when>
-							<c:otherwise> Expect clear skies. </c:otherwise>
-						</c:choose></td>
-				</tr>
+				
+				<td align="center"><c:set var="message" />
+				
+				<% if (session.getAttribute("tempUnit") == "C") { %>
+				<c:if test="${forecast.high > 23.8}"> Bring an extra gallon of water. </c:if> 
+				<c:if test="${forecast.high - forecast.low > 6.6}"> Wear breathable layers. </c:if>
+				<c:if test="${forecast.low < -6.6}"> Visit with caution! We cannot be held responsible for frostbite. </c:if>
+				<% } else {%>
+				<c:if test="${forecast.high > 75}"> Bring an extra gallon of water. </c:if> 
+				<c:if test="${forecast.high - forecast.low > 20}"> Wear breathable layers. </c:if>
+				<c:if test="${forecast.low < 20}"> Visit with caution! We cannot be held responsible for frostbite. </c:if>
+				<% } %>
+				
+			<br> 
+			
+			<c:set var="weather" />
+			<c:choose>
+				<c:when test="${forecast.forecast.equals('rain')}"> It's going to rain. Pack rain gear and wear waterproof shoes. </c:when>
+				<c:when test="${forecast.forecast.equals('snow')}"> It's going to snow. Pack snowshoes. </c:when>
+				<c:when test="${forecast.forecast.equals('thunderstorms')}"> It's going to thunderstorm. Seek shelter and avoid hiking on exposed ridges. </c:when>
+				<c:when test="${forecast.forecast.equals('sunny')}"> It's going to be sunny. Pack sunblock. </c:when>
+				<c:otherwise> Expect clear skies. </c:otherwise>
+			</c:choose>
+			</td>
+			</tr>
 
 			</c:forEach>
 
@@ -119,12 +131,18 @@ h2 {
 			<form:form action="${temperatureUrl}" method="POST">
 				<label for="temperature">Temperature Preference</label>
 				<br>
-				<input type="radio" name="temperature" value="Fahrenheit">Fahrenheit<br>
-				<input type="radio" name="temperature" value="Celsius">Celsius<br>
+				
+				<% if (session.getAttribute("tempUnit") == "C") { %>
+ 			   		<input type="radio" name="temperature" value="Fahrenheit">Fahrenheit<br>
+					<input checked="checked" type="radio" name="temperature" value="Celsius">Celsius<br>
+				<% } else {%>
+ 			   		<input checked="checked" type="radio" name="temperature" value="Fahrenheit">Fahrenheit<br>
+					<input type="radio" name="temperature" value="Celsius">Celsius<br>
+				<% } %>
+
 				<input type="submit" value="Change temperature preference">
 
 				<br>
-
 			</form:form>
 		</p>
 
